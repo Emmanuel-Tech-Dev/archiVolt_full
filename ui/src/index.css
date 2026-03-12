@@ -1,0 +1,270 @@
+/* src/index.css */
+/* @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&display=swap"); */
+
+:root {
+  --bg-base: #060608;
+  --bg-surface: #0d0d12;
+  --bg-elevated: #13131a;
+  --bg-hover: #1a1a24;
+
+  --border-dim: #1e1e2a;
+  --border-mid: #2a2a3a;
+  --border-bright: #3a3a50;
+
+  --text-primary: #e8e8f0;
+  --text-secondary: #7a7a9a;
+  --text-dim: #3a3a50;
+
+  --accent-green: #00ff88;
+  --accent-blue: #3ecfff;
+  --accent-orange: #ff6b35;
+  --accent-yellow: #ffd166;
+
+  --green-dim: rgba(0, 255, 136, 0.08);
+  --blue-dim: rgba(62, 207, 255, 0.08);
+  --orange-dim: rgba(255, 107, 53, 0.08);
+
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+  --font-display: "Syne", sans-serif;
+
+  --radius: 2px;
+  --radius-md: 4px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-mid);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-bright);
+}
+
+/* Ant Design overrides */
+.ant-layout {
+  background: var(--bg-base) !important;
+}
+.ant-layout-header {
+  background: var(--bg-surface) !important;
+}
+
+.ant-tabs-nav {
+  margin-bottom: 0 !important;
+}
+.ant-tabs-tab {
+  font-family: var(--font-mono) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.15em !important;
+  color: var(--text-secondary) !important;
+  padding: 12px 24px !important;
+  text-transform: uppercase;
+  transition: color 0.2s !important;
+}
+.ant-tabs-tab:hover {
+  color: var(--text-primary) !important;
+}
+.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--accent-green) !important;
+}
+.ant-tabs-ink-bar {
+  background: var(--accent-green) !important;
+  height: 1px !important;
+}
+.ant-tabs-nav::before {
+  border-color: var(--border-dim) !important;
+}
+
+.ant-table {
+  background: transparent !important;
+  font-family: var(--font-mono) !important;
+  font-size: 12px !important;
+}
+.ant-table-thead > tr > th {
+  background: var(--bg-elevated) !important;
+  color: var(--text-dim) !important;
+  font-size: 9px !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  border-color: var(--border-dim) !important;
+  font-family: var(--font-mono) !important;
+}
+.ant-table-tbody > tr > td {
+  background: transparent !important;
+  border-color: var(--border-dim) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-mono) !important;
+}
+.ant-table-tbody > tr:hover > td {
+  background: var(--bg-hover) !important;
+}
+.ant-table-wrapper .ant-spin-nested-loading .ant-spin-container {
+  background: transparent !important;
+}
+.ant-pagination-item {
+  background: var(--bg-elevated) !important;
+  border-color: var(--border-dim) !important;
+  font-family: var(--font-mono) !important;
+}
+.ant-pagination-item a {
+  color: var(--text-secondary) !important;
+}
+.ant-pagination-item-active {
+  border-color: var(--accent-green) !important;
+}
+.ant-pagination-item-active a {
+  color: var(--accent-green) !important;
+}
+
+.ant-btn {
+  font-family: var(--font-mono) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  border-radius: var(--radius) !important;
+}
+.ant-btn-primary {
+  background: transparent !important;
+  border-color: var(--accent-green) !important;
+  color: var(--accent-green) !important;
+  box-shadow: none !important;
+}
+.ant-btn-primary:hover {
+  background: var(--green-dim) !important;
+  border-color: var(--accent-green) !important;
+  color: var(--accent-green) !important;
+}
+.ant-btn-default {
+  background: transparent !important;
+  border-color: var(--border-mid) !important;
+  color: var(--text-secondary) !important;
+}
+.ant-btn-default:hover {
+  border-color: var(--border-bright) !important;
+  color: var(--text-primary) !important;
+}
+.ant-btn-dangerous {
+  background: transparent !important;
+  border-color: var(--accent-orange) !important;
+  color: var(--accent-orange) !important;
+}
+
+.ant-tag {
+  font-family: var(--font-mono) !important;
+  font-size: 9px !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  border-radius: var(--radius) !important;
+  background: var(--bg-elevated) !important;
+  border-color: var(--border-mid) !important;
+  color: var(--text-secondary) !important;
+}
+
+.ant-modal-content {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-dim) !important;
+  border-radius: var(--radius-md) !important;
+}
+.ant-modal-header {
+  background: transparent !important;
+  border-color: var(--border-dim) !important;
+}
+.ant-modal-title {
+  color: var(--text-primary) !important;
+  font-family: var(--font-mono) !important;
+}
+.ant-modal-close {
+  color: var(--text-secondary) !important;
+}
+
+.ant-message-notice-content {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-dim) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 11px !important;
+  border-radius: var(--radius) !important;
+}
+
+.ant-tooltip-inner {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-dim) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 10px !important;
+  color: var(--text-primary) !important;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.4s ease forwards;
+}
