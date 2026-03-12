@@ -1,6 +1,6 @@
 // src/pages/Dashboard.jsx
 import { useState, useEffect, useCallback } from 'react';
-import { Button, Tooltip } from 'antd';
+import { Button, Tooltip, Card } from 'antd';
 import { getHealth, getLedger } from '../api';
 
 const NODES = [
@@ -24,7 +24,7 @@ function StatusDot({ ok, checking }) {
 function NodeCard({ node, status = {} }) {
     const { ok, latency, checking } = status;
     return (
-        <div style={{
+        <Card style={{
             background: 'var(--bg-surface)',
             border: `1px solid ${ok ? node.color + '33' : checking ? '#ffffff11' : '#ff444422'}`,
             borderRadius: 'var(--radius)',
@@ -81,7 +81,7 @@ function NodeCard({ node, status = {} }) {
                     )}
                 </div>
             </div>
-        </div>
+        </Card>
     );
 }
 
@@ -91,57 +91,64 @@ function MeshBar({ online, total }) {
     const label = online === total ? 'FULL REDUNDANCY' : online >= 2 ? 'DEGRADED — RECOVERABLE' : 'CRITICAL';
 
     return (
-        <div style={{
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-dim)',
-            borderRadius: 'var(--radius)',
-            padding: '20px 28px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 32,
-        }}>
-            <div style={{ flexShrink: 0 }}>
-                <div style={{ fontSize: 9, color: 'var(--text-dim)', letterSpacing: '0.2em', marginBottom: 8 }}>MESH INTEGRITY</div>
-                <div style={{ fontSize: 22, fontWeight: 700, color, letterSpacing: '-0.02em' }}>
-                    {online}/{total} <span style={{ fontSize: 12, fontWeight: 400, color: 'var(--text-dim)' }}>nodes</span>
+        <Card
+        >
+            <div style={{
+                background: 'var(--bg-surface)',
+                border: '1px solid var(--border-dim)',
+                borderRadius: 'var(--radius)',
+                padding: '20px 28px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 32,
+            }}>
+                <div style={{ flexShrink: 0 }}>
+                    <div style={{ fontSize: 9, color: 'var(--text-dim)', letterSpacing: '0.2em', marginBottom: 8 }}>MESH INTEGRITY</div>
+                    <div style={{ fontSize: 22, fontWeight: 700, color, letterSpacing: '-0.02em' }}>
+                        {online}/{total} <span style={{ fontSize: 12, fontWeight: 400, color: 'var(--text-dim)' }}>nodes</span>
+                    </div>
+                </div>
+
+                <div style={{ flex: 1 }}>
+                    <div style={{ height: 3, background: 'var(--border-dim)', borderRadius: 2, marginBottom: 10 }}>
+                        <div style={{
+                            height: '100%', width: `${pct}%`,
+                            background: color,
+                            borderRadius: 2,
+                            boxShadow: `0 0 8px ${color}`,
+                            transition: 'width 0.6s ease',
+                        }} />
+                    </div>
+                    <div style={{ fontSize: 11, fontWeight: 600, color }}>{label}</div>
+                    <div style={{ fontSize: 10, color: 'var(--text-dim)', marginTop: 4 }}>
+                        {online === total
+                            ? 'All shards accessible. Zero-knowledge integrity confirmed.'
+                            : online >= 2
+                                ? 'File reconstruction possible via XOR parity recovery.'
+                                : 'Insufficient shards to reconstruct files. Immediate action required.'}
+                    </div>
                 </div>
             </div>
 
-            <div style={{ flex: 1 }}>
-                <div style={{ height: 3, background: 'var(--border-dim)', borderRadius: 2, marginBottom: 10 }}>
-                    <div style={{
-                        height: '100%', width: `${pct}%`,
-                        background: color,
-                        borderRadius: 2,
-                        boxShadow: `0 0 8px ${color}`,
-                        transition: 'width 0.6s ease',
-                    }} />
-                </div>
-                <div style={{ fontSize: 11, fontWeight: 600, color }}>{label}</div>
-                <div style={{ fontSize: 10, color: 'var(--text-dim)', marginTop: 4 }}>
-                    {online === total
-                        ? 'All shards accessible. Zero-knowledge integrity confirmed.'
-                        : online >= 2
-                            ? 'File reconstruction possible via XOR parity recovery.'
-                            : 'Insufficient shards to reconstruct files. Immediate action required.'}
-                </div>
-            </div>
-        </div>
+        </Card>
     );
 }
 
 function StatCard({ label, value, accent }) {
     return (
-        <div style={{
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-dim)',
+
+        <Card style={{
+            // background: 'var(--bg-surface)',
+            // border: '1px solid var(--border-dim)',
             borderRadius: 'var(--radius)',
             padding: '20px 24px',
             animation: 'fadeUp 0.4s ease forwards',
         }}>
             <div style={{ fontSize: 9, color: 'var(--text-dim)', letterSpacing: '0.2em', marginBottom: 10 }}>{label}</div>
             <div style={{ fontSize: 28, fontWeight: 700, color: accent || 'var(--text-primary)', letterSpacing: '-0.03em' }}>{value}</div>
-        </div>
+
+        </Card>
+
     );
 }
 

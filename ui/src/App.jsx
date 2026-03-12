@@ -17,6 +17,24 @@ const TABS = [
 export default function App() {
   const [active, setActive] = useState('dashboard');
   const [time, setTime] = useState(new Date());
+  const [isDark, setIsDark] = useState(false)
+
+  const toggle = () => {
+    setIsDark(d => {
+      const next = !d
+      // Apply to <html> so body and all CSS vars pick it up
+      document.documentElement.setAttribute('data-theme', next ? 'dark' : 'light')
+      localStorage.setItem('theme', next ? 'dark' : 'light')
+      return next
+    })
+  }
+
+  // On mount, restore saved preference
+  useEffect(() => {
+    const saved = localStorage.getItem('theme') ?? 'light'
+    document.documentElement.setAttribute('data-theme', saved)
+    setIsDark(saved === 'dark')
+  }, [])
 
   useEffect(() => {
     const iv = setInterval(() => setTime(new Date()), 1000);
@@ -34,8 +52,9 @@ export default function App() {
   };
 
   return (
-    <ConfigProvider theme={{
+    <div data-theme={isDark ? 'dark' : 'light'}> <ConfigProvider theme={{
       algorithm: theme.darkAlgorithm,
+
       token: { colorBgBase: '#080809', colorPrimary: '#f0f0ee', borderRadius: 0, fontFamily: "'DM Mono', monospace" },
     }}>
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--black)' }}>
@@ -46,19 +65,23 @@ export default function App() {
           position: 'sticky', top: 0, zIndex: 100, background: 'var(--black)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', borderRight: '1px solid var(--dim)', paddingRight: 32, marginRight: 40, flexShrink: 0 }}>
-            <span style={{ fontFamily: 'var(--display)', fontSize: 11, fontWeight: 900, letterSpacing: '0.08em' }}>ARCHIVOLT</span>
+            <span style={{ fontFamily: 'var(--display)', fontSize: 14, fontWeight: 900, letterSpacing: '0.08em' }}>ARCHIVOLT</span>
           </div>
 
           <div style={{ flex: 1, display: 'flex', alignItems: 'stretch' }}>
             <Tabs activeKey={active} onChange={setActive}
               items={TABS.map(t => ({ key: t.key, label: t.label }))}
-              tabBarStyle={{ height: 52, margin: 0 }} />
+              tabBarStyle={{ height: 52, margin: 0, fontSize: 16 }} />
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', borderLeft: '1px solid var(--dim)', paddingLeft: 24, marginLeft: 24, flexShrink: 0 }}>
-            <span style={{ fontSize: 11, color: 'var(--muted)', letterSpacing: '0.1em', fontStyle: 'italic' }}>
+            <span style={{ fontSize: 16, color: 'var(--muted)', letterSpacing: '0.1em', fontStyle: 'italic' }}>
               {clock}
             </span>
+            <button onClick={() => toggle()}>
+              {isDark ? 'Light Mode' : 'Dark Mode'}
+            </button>
+
           </div>
         </header>
 
@@ -69,6 +92,7 @@ export default function App() {
           <span style={{ fontSize: 9, color: 'var(--sub)', letterSpacing: '0.1em' }}>v1.0.0</span>
         </footer>
       </div>
-    </ConfigProvider>
+    </ConfigProvider></div>
+
   );
 }

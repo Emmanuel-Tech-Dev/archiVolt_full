@@ -115,6 +115,43 @@ export default function Ledger() {
         {
             title: 'Filename',
             dataIndex: 'filename',
+            filters: [
+                {
+                    text: 'Joe',
+                    value: 'Joe',
+                },
+                {
+                    text: 'Category 1',
+                    value: 'Category 1',
+                    children: [
+                        {
+                            text: 'Yellow',
+                            value: 'Yellow',
+                        },
+                        {
+                            text: 'Pink',
+                            value: 'Pink',
+                        },
+                    ],
+                },
+                {
+                    text: 'Category 2',
+                    value: 'Category 2',
+                    children: [
+                        {
+                            text: 'Green',
+                            value: 'Green',
+                        },
+                        {
+                            text: 'Black',
+                            value: 'Black',
+                        },
+                    ],
+                },
+            ],
+            filterMode: 'tree',
+            filterSearch: true,
+            onFilter: (value, record) => record.filename.includes(value),
             render: (name, record) => (
                 <div>
                     <div style={{ color: 'var(--text-primary)', fontSize: 12, marginBottom: 2 }}>{name}</div>
@@ -126,6 +163,8 @@ export default function Ledger() {
             title: 'Size',
             dataIndex: 'file_size',
             width: 90,
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a.file_size - b.file_size,
             render: (size) => (
                 <span style={{ color: 'var(--text-secondary)', fontSize: 11 }}>{fmtSize(size)}</span>
             ),
@@ -133,6 +172,8 @@ export default function Ledger() {
         {
             title: 'Nodes',
             width: 200,
+
+
             render: (_, record) => (
                 <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
                     <ProviderTag provider={record.shard_a_provider} />
@@ -154,26 +195,25 @@ export default function Ledger() {
             width: 140,
             render: (_, record) => (
                 <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
-                    <Tooltip title="Reconstruct and download file">
-                        <Button
-                            size="small"
-                            type="primary"
-                            loading={downloading[record.id]}
-                            onClick={() => handleDownload(record)}
-                        >
-                            Download
-                        </Button>
-                    </Tooltip>
-                    <Tooltip title="Remove ledger entry">
-                        <Button
-                            size="small"
-                            danger
-                            loading={deleting[record.id]}
-                            onClick={() => handleDelete(record)}
-                        >
-                            Delete
-                        </Button>
-                    </Tooltip>
+
+                    <Button
+                        size="small"
+                        type="primary"
+                        loading={downloading[record.id]}
+                        onClick={() => handleDownload(record)}
+                    >
+                        Download
+                    </Button>
+
+                    <Button
+                        size="small"
+                        danger
+                        loading={deleting[record.id]}
+                        onClick={() => handleDelete(record)}
+                    >
+                        Delete
+                    </Button>
+
                 </div>
             ),
         },
@@ -196,14 +236,17 @@ export default function Ledger() {
                     <span style={{ fontSize: 9, color: 'var(--text-dim)', letterSpacing: '0.1em' }}>
                         {total} {total === 1 ? 'entry' : 'entries'}
                     </span>
-                    <Button onClick={() => fetchData()}>Refresh</Button>
+                    <Tooltip title="Refetch data " placement='top'>
+                        <Button onClick={() => fetchData()}>Refresh</Button>
+                    </Tooltip>
+
                 </div>
             </div>
 
             {/* Table */}
             <div style={{
-                background: 'var(--bg-surface)',
-                border: '1px solid var(--border-dim)',
+                background: 'var(--color-bg-base)',
+                // border: '1px solid var(--border-dim)',
                 borderRadius: 'var(--radius)',
                 overflow: 'hidden',
             }}>
@@ -223,11 +266,11 @@ export default function Ledger() {
                     locale={{
                         emptyText: (
                             <div style={{ padding: '48px 0', textAlign: 'center' }}>
-                                <div style={{ fontSize: 28, marginBottom: 12, color: 'var(--text-dim)' }}>⬡</div>
-                                <div style={{ fontSize: 11, color: 'var(--text-dim)', letterSpacing: '0.1em' }}>
+                                <div style={{ fontSize: 28, marginBottom: 12, }}>⬡</div>
+                                <div style={{ fontSize: 11, letterSpacing: '0.1em' }}>
                                     NO FILES IN LEDGER
                                 </div>
-                                <div style={{ fontSize: 10, color: 'var(--text-dim)', marginTop: 8 }}>
+                                <div style={{ fontSize: 10, marginTop: 8 }}>
                                     Upload a file to get started
                                 </div>
                             </div>

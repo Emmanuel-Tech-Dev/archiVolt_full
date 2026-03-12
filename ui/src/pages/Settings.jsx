@@ -1,7 +1,6 @@
 // src/pages/Settings.jsx
 import { useState } from 'react';
-import { Button, message } from 'antd';
-
+import { Button, message, Input, Card, Alert } from 'antd';
 const CONFIG_ITEMS = [
     {
         section: 'DATABASE',
@@ -49,7 +48,7 @@ function Field({ item, value, onChange, show, onToggle }) {
                 {item.label}
             </label>
             <div style={{ display: 'flex', gap: 8 }}>
-                <input
+                <Input
                     type={item.type === 'password' && !show ? 'password' : 'text'}
                     value={value}
                     onChange={(e) => onChange(item.key, e.target.value)}
@@ -114,16 +113,23 @@ export default function Settings() {
                 <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
                     Settings
                 </h1>
-                <div style={{
+                <Alert type='warning' style={{
                     marginTop: 12, padding: '10px 14px',
                     background: 'rgba(255,209,102,0.06)',
                     border: '1px solid rgba(255,209,102,0.2)',
                     borderRadius: 'var(--radius)',
                     fontSize: 10, color: '#ffd166', lineHeight: 1.7,
-                }}>
-                    ⚠ These values are for reference only. Configuration is managed via your <code style={{ fontFamily: 'var(--font-mono)' }}>.env</code> file on the server.
-                    Restart the server after making changes.
-                </div>
+                }}
+                    description={
+                        <span>
+                            ⚠ These values are for reference only. Configuration is managed via your <code style={{ fontFamily: 'var(--font-mono)' }}>.env</code> file on the server.
+                            Restart the server after making changes.
+                        </span>
+                    }
+
+                />
+
+
             </div>
 
             {/* Config sections */}
@@ -174,6 +180,7 @@ export default function Settings() {
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10 }}>
                     {SHARD_INFO.map(s => (
+
                         <div key={s.label} style={{
                             background: 'var(--bg-surface)',
                             border: `1px solid ${s.color}22`,

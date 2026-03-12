@@ -164,9 +164,9 @@ export default function Upload() {
                 onDragLeave={() => setDragging(false)}
                 onDrop={onDrop}
                 style={{
-                    border: `1px dashed ${dragging ? 'var(--accent-green)' : file ? 'var(--border-bright)' : 'var(--border-mid)'}`,
+                    border: `1px dashed ${dragging ? 'var(--color-accent)' : file ? 'var(--color-accent)' : 'var(--color-accent-light)'}`,
                     borderRadius: 'var(--radius)',
-                    background: dragging ? 'var(--green-dim)' : 'var(--bg-surface)',
+                    background: dragging ? 'var(--color-bg-base)' : 'var(--color-bg-elevated)',
                     padding: '48px 32px',
                     textAlign: 'center',
                     cursor: uploading ? 'not-allowed' : 'pointer',
