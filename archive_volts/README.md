@@ -89,7 +89,7 @@ This happens silently — the client receives the correct file with no error.
                                      │ HTTP
                         ┌────────────▼────────────────┐
                         │        Express Server         │
-                        │         server.js             │
+                        │         index.js             │
                         └──┬──────────┬───────────┬───┘
                            │          │           │
                ┌───────────▼──┐  ┌───▼──────┐  ┌▼──────────────┐
