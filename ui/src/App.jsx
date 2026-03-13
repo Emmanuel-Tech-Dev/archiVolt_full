@@ -56,6 +56,12 @@ export default function App() {
       algorithm: theme.darkAlgorithm,
 
       token: { colorBgBase: '#080809', colorPrimary: '#f0f0ee', borderRadius: 0, fontFamily: "'DM Mono', monospace" },
+      components: {
+        Checkbox: {
+          colorPrimary: 'var(--color-accent)',
+          colorPrimaryHover: 'var(--color-accent)',
+        },
+      },
     }}>
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--black)' }}>
 
