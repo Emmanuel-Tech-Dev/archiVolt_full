@@ -27,6 +27,8 @@ const cloudinaryDriver = {
    * @param {Readable} stream - readable stream of shard bytes
    * @returns {Promise<string>} resolves with the Cloudinary public_id
    */
+
+  //here the key could be 173536863568_c.shard , so cut the _c.shard and use the remaining as id
   upload(key, stream) {
     return new Promise((resolve, reject) => {
       // Strip extension from key to use as public_id

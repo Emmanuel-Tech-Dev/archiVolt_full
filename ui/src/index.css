@@ -812,7 +812,7 @@ a.ant-typography:hover {
   color: var(--color-text-primary) !important;
   font-size: 13.5px !important;
   font-family: var(--font-body) !important;
-  background-color: var(--color-bg-container) !important;
+  background-color: var(--color-bg-elevated) !important;
 }
 
 /* Sorted body column */
@@ -968,7 +968,7 @@ a.ant-typography:hover {
   border-color: var(--color-accent) !important;
 }
 .ant-pagination-item:hover a {
-  color: var(--color-accent) !important;
+  color: var(--color-accent-light) !important;
 }
 .ant-pagination-item-active {
   background-color: var(--color-accent) !important;
