@@ -5,7 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Upload from './pages/Upload';
 import Ledger from './pages/Ledger';
 import Settings from './pages/Settings';
-import './index.css';
+// import './index.css';
 
 const TABS = [
   { key: 'dashboard', label: 'Overview' },

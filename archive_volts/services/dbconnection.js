@@ -23,10 +23,10 @@ const db = mysql.createPool({
 export async function testConnection() {
   try {
     const conn = await db.getConnection();
-    console.log("✅ MySQL connected successfully.");
+    console.log("MySQL connected successfully.");
     conn.release();
   } catch (err) {
-    console.error("❌ MySQL connection failed:", err.message);
+    console.error("MySQL connection failed:", err.message);
     process.exit(1); // hard stop — no point running without a DATABASE
   }
 }

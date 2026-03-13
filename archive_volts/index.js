@@ -328,7 +328,7 @@ app.use((req, res) => {
 async function start() {
   await testConnection();
   app.listen(PORT, () => {
-    console.log(`\n🗄  Archivolt Core running → http://localhost:${PORT}`);
+    console.log(`\n Archivolt Core running → http://localhost:${PORT}`);
     console.log(`   POST   /upload`);
     console.log(`   GET    /download/:id`);
     console.log(`   GET    /health`);

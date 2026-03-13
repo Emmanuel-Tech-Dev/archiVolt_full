@@ -172,7 +172,7 @@ export default function Ledger() {
         {
             title: 'Nodes',
             width: 200,
-
+            //  tags: [shard_a_provider, shard_b_provider, shard_c_provider]
 
             render: (_, record) => (
                 <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
@@ -219,6 +219,17 @@ export default function Ledger() {
         },
     ];
 
+
+    const rowSelection = {
+        onChange: (selectedRowKeys, selectedRows) => {
+            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        },
+        getCheckboxProps: record => ({
+            disabled: record.name === 'Disabled User', // Column configuration not to be checked
+            name: record.name,
+        }),
+    };
+
     return (
         <div style={{ padding: 32 }}>
 
@@ -255,6 +266,8 @@ export default function Ledger() {
                     columns={columns}
                     rowKey="id"
                     loading={loading}
+                    rowSelection={{ type: "checkbox", ...rowSelection }}
+
                     pagination={{
                         current: page,
                         pageSize,
